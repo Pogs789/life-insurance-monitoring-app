@@ -56,4 +56,4 @@ jobs:
           node-version: '20'
       
       - name: Check formatting
-        run: npx prettier --check "apps/backend/**/*. {ts,json}"
+        run: npx prettier --check "apps/backend/**/*.{ts,json}"
