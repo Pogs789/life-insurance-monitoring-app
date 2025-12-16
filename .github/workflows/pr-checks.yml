@@ -1,0 +1,38 @@
+name: PR Checks
+
+on: 
+  pull_request:
+    branches: [main]
+
+jobs:
+  pr-validation:
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - uses: actions/checkout@v4
+      
+      - name: Check PR title format
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+          requireScope: false
+      
+      - name: Check for merge conflicts
+        run: |
+          git fetch origin main
+          if git merge-tree $(git merge-base HEAD origin/main) HEAD origin/main | grep -q "<<<<<"; then
+            echo "Merge conflicts detected!"
+            exit 1
+          fi
