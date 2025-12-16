@@ -1,0 +1,24 @@
+{
+  "name": "life-insurance-monitoring-app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev: backend": "pnpm --filter backend start: dev",
+    "dev:mobile": "cd apps/mobile && flutter run",
+    "build":  "pnpm --filter shared build && pnpm --filter backend build",
+    "build:mobile": "cd apps/mobile && flutter build",
+    "test": "pnpm --filter backend test",
+    "test:mobile": "cd apps/mobile && flutter test",
+    "lint: backend": "pnpm --filter backend lint",
+    "lint:mobile": "cd apps/mobile && flutter analyze",
+    "format": "prettier --write \"apps/backend/**/*.{ts,json}\" && cd apps/mobile && dart format ."
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}

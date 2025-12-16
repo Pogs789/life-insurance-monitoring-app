@@ -1,0 +1,123 @@
+# Dependencies
+node_modules/
+. pnp
+.pnp.js
+
+# Testing
+coverage/
+*. lcov
+
+# Production
+dist/
+build/
+
+# IDE
+.vscode/
+. idea/
+*.swp
+*. swo
+*~
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment
+.env
+.env. local
+.env.*.local
+*. env
+
+# ====================
+# Backend (NestJS)
+# ====================
+apps/backend/dist/
+apps/backend/node_modules/
+apps/backend/.env
+apps/backend/.env.test
+apps/backend/.env.production
+
+# ====================
+# Mobile (Flutter)
+# ====================
+apps/mobile/. dart_tool/
+apps/mobile/. flutter-plugins
+apps/mobile/. flutter-plugins-dependencies
+apps/mobile/.packages
+apps/mobile/. pub-cache/
+apps/mobile/. pub/
+apps/mobile/build/
+
+# Flutter/Dart/Pub related
+apps/mobile/**/doc/api/
+apps/mobile/. dart_tool/
+apps/mobile/. packages
+apps/mobile/. pub/
+apps/mobile/pubspec.lock
+
+# iOS
+apps/mobile/ios/**/dgph
+apps/mobile/ios/**/*.mode1v3
+apps/mobile/ios/**/*.mode2v3
+apps/mobile/ios/**/*.moved-aside
+apps/mobile/ios/**/*.pbxuser
+apps/mobile/ios/**/*.perspectivev3
+apps/mobile/ios/**/*sync/
+apps/mobile/ios/**/. sconsign.dblite
+apps/mobile/ios/**/.tags*
+apps/mobile/ios/**/. vagrant/
+apps/mobile/ios/**/DerivedData/
+apps/mobile/ios/**/Icon? 
+apps/mobile/ios/**/Pods/
+apps/mobile/ios/**/.symlinks/
+apps/mobile/ios/**/profile
+apps/mobile/ios/**/xcuserdata
+apps/mobile/ios/. generated/
+apps/mobile/ios/Flutter/.last_build_id
+apps/mobile/ios/Flutter/App.framework
+apps/mobile/ios/Flutter/Flutter.framework
+apps/mobile/ios/Flutter/Flutter.podspec
+apps/mobile/ios/Flutter/Generated.xcconfig
+apps/mobile/ios/Flutter/ephemeral
+apps/mobile/ios/Flutter/app.flx
+apps/mobile/ios/Flutter/app.zip
+apps/mobile/ios/Flutter/flutter_assets/
+apps/mobile/ios/Flutter/flutter_export_environment. sh
+apps/mobile/ios/ServiceDefinitions.json
+apps/mobile/ios/Runner/GeneratedPluginRegistrant.*
+
+# Android
+apps/mobile/android/**/gradle-wrapper.jar
+apps/mobile/android/. gradle
+apps/mobile/android/captures/
+apps/mobile/android/gradlew
+apps/mobile/android/gradlew.bat
+apps/mobile/android/local.properties
+apps/mobile/android/**/GeneratedPluginRegistrant.java
+apps/mobile/android/key.properties
+apps/mobile/android/**/*.jks
+apps/mobile/android/**/*.keystore
+
+# Web
+apps/mobile/web/*. js
+apps/mobile/web/*. js_
+apps/mobile/web/*.js.deps
+apps/mobile/web/*.js.map
+
+# ====================
+# Shared Package
+# ====================
+packages/shared/dist/
+packages/shared/node_modules/
+
+# ====================
+# OS
+# ====================
+.DS_Store
+Thumbs.db
