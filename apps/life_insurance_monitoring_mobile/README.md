@@ -1,6 +1,6 @@
 # life_insurance_monitoring_mobile
 
-A new Flutter project.
+A Mini-App that computes Monthly Remittances for Life Insurance Policies based on Insurance Holders' Payment Periods.
 
 ## Getting Started
 

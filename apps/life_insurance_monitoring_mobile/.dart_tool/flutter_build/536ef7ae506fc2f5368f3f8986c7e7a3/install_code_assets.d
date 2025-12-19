@@ -1,0 +1,1 @@
+ C:\\Users\\loric\\OneDrive\\Documents\\My\ Coding\ Projects\\Full\ Stack\ Development\\life-insurance-monitoring-app\\apps\\life_insurance_monitoring_mobile\\.dart_tool\\flutter_build\\536ef7ae506fc2f5368f3f8986c7e7a3\\native_assets.json: 
