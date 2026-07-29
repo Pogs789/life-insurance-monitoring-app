@@ -146,6 +146,7 @@ export class AuthService {
       .join(' ');
 
     const insuranceCompany = userProfile.insuranceCompany.companyName;
+    const companyId = userProfile.insuranceCompany.id;
 
     await this.storeRefreshToken(user.id, tokens.refreshToken);
 
@@ -153,6 +154,7 @@ export class AuthService {
       ...tokens,
       user: {
         id: user.id,
+        companyId,
         fullName,
         insuranceCompany,
         email: user.email,
