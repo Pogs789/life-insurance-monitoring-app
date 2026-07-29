@@ -201,11 +201,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<CompanyProvider>(
-          create: (_) => CompanyProvider(
-            GetCompanyUseCase(
-              CompanyRepositoryImpl(CompanyRemoteDataSourceImpl(dio: Dio())),
-            ),
-          ),
+          create: (_) {
+            final repository = CompanyRepositoryImpl(
+              CompanyRemoteDataSourceImpl(dio: Dio()),
+            );
+            return CompanyProvider(
+              GetCompanyUseCase(repository),
+              GetCompanyProductsUseCase(repository),
+            );
+          },
         ),
       ],
       child: Builder(

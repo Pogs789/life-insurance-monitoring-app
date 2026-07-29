@@ -43,6 +43,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
       value: session.fullName,
     );
     await _secureStorage.write(
+      key: StorageConstants.companyId,
+      value: session.companyId,
+    );
+    await _secureStorage.write(
       key: StorageConstants.insuranceCompany,
       value: session.insuranceCompany,
     );
@@ -117,12 +121,13 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<List<String>> getFullNameAndCompany() async {
     final String? fullName = await _secureStorage.read(key: StorageConstants.fullName);
     final String? insuranceCompany = await _secureStorage.read(key: StorageConstants.insuranceCompany);
+    final String? companyId = await _secureStorage.read(key: StorageConstants.companyId);
 
-    if(fullName == null || insuranceCompany == null) {
+    if(fullName == null || insuranceCompany == null || companyId == null) {
       await clearSession();
       return [];
     }
 
-    return [fullName, insuranceCompany];
+    return [fullName, insuranceCompany, companyId];
   }
 }

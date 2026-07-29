@@ -10,7 +10,6 @@ export class PolicyManagementService {
     private prisma: PrismaService,
     private appConstants: AppConstants,
   ) {}
-  //TODO: Create a Basic CRUD Feature which only the Admin, which is basically the Insurance Company that will use this app, can access it, while the insurance agent can only view it.
   //TODO: If we are done with the "Happy Path", proceed to writing unit tests to identify possible edge cases.
   async create(createPolicyManagementDto: CreatePolicyManagementDto) {
     const {
