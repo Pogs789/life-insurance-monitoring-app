@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreatePolicyManagementDto } from './dto/create-policy-management.dto';
 import { UpdatePolicyManagementDto } from './dto/update-policy-management.dto';
@@ -24,9 +25,9 @@ export class PolicyManagementController {
     return this.policyManagementService.create(createPolicyManagementDto);
   }
 
-  @Get(':companyId')
-  findAll(@Param(':companyId') id: string) {
-    return this.policyManagementService.findAll(id);
+  @Get()
+  findAll(@Query('companyId') companyId: string) {
+    return this.policyManagementService.findAll(companyId);
   }
 
   @Get(':productId')

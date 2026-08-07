@@ -13,6 +13,7 @@ class AuthInterceptor extends Interceptor {
     debugPrint('Interceptor path: ${options.path}');
     final token = await secureStorage.read(key: StorageConstants.accessTokenKey);
     debugPrint('Token found by interceptor: ${token != null && token.isNotEmpty}');
+    debugPrint('Token found by interceptor: $token');
 
     if(token != null && token.isNotEmpty){
       options.headers['Authorization'] = 'Bearer $token';

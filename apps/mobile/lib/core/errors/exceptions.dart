@@ -101,12 +101,12 @@ String? _extractValidationMessage(dynamic data) {
 
 AppException mapToAppException(Object error, StackTrace stackTrace) {
 
+  debugPrint("Stack Trace: $stackTrace");
+
   if (error is AppException) return error;
 
   if (error is DioException) {
     final statusCode = error.response?.statusCode;
-
-    debugPrint('Error: ${error}');
 
     switch (error.type) {
       case DioExceptionType.connectionTimeout:

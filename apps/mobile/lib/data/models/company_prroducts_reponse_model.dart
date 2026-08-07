@@ -18,7 +18,7 @@ class CompanyProductsResponseModel {
         id: json['id'],
         insuranceProductName: json['insuranceProductName'],
         productContents: json['productContents'],
-        productAmount: double.parse(json['amount']),
+        productAmount: double.parse(json['productAmount']),
         paymentTerms: List<String>.from(json['paymentTerms'])
     );
   }
