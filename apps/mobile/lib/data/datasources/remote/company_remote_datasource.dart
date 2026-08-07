@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:life_insurance_monitoring_mobile/core/constants/api_endpoints.dart';
 import 'package:life_insurance_monitoring_mobile/core/errors/exceptions.dart';
 import 'package:life_insurance_monitoring_mobile/data/datasources/local/auth_local_datasource.dart';
@@ -46,6 +47,8 @@ class CompanyRemoteDataSourceImpl implements CompanyRemoteDataSource {
               'companyId': companyId,
             }
         );
+
+        debugPrint("Backend Data: ${result.data}");
 
         if (result.statusCode == 200) {
           return CompanyProductsResponseModel.fromJsonList(result.data as List<dynamic>);

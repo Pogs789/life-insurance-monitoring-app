@@ -14,7 +14,7 @@ class _RemittancePageState extends State<RemittancePage> {
     {
       "id": "REM-2025-001",
       "policyNo": "POL-882192",
-      "amount": "₱ 4,500.00",
+      "productAmount": "₱ 4,500.00",
       "date": "Dec 18, 2025",
       "status": "Verified",
       "method": "Bank Transfer",
@@ -22,7 +22,7 @@ class _RemittancePageState extends State<RemittancePage> {
     {
       "id": "REM-2025-002",
       "policyNo": "POL-112344",
-      "amount": "₱ 2,100.00",
+      "productAmount": "₱ 2,100.00",
       "date": "Dec 17, 2025",
       "status": "Pending",
       "method": "Gcash",
@@ -30,7 +30,7 @@ class _RemittancePageState extends State<RemittancePage> {
     {
       "id": "REM-2025-003",
       "policyNo": "POL-991231",
-      "amount": "₱ 15,000.00",
+      "productAmount": "₱ 15,000.00",
       "date": "Dec 15, 2025",
       "status": "Verified",
       "method": "Check Deposit",
@@ -38,7 +38,7 @@ class _RemittancePageState extends State<RemittancePage> {
     {
       "id": "REM-2025-004",
       "policyNo": "POL-772122",
-      "amount": "₱ 3,250.00",
+      "productAmount": "₱ 3,250.00",
       "date": "Dec 10, 2025",
       "status": "Rejected", // Good for demonstrating error handling UI
       "method": "Bank Transfer",
@@ -46,7 +46,7 @@ class _RemittancePageState extends State<RemittancePage> {
     {
       "id": "REM-2025-005",
       "policyNo": "POL-551233",
-      "amount": "₱ 4,500.00",
+      "productAmount": "₱ 4,500.00",
       "date": "Dec 05, 2025",
       "status": "Verified",
       "method": "Auto-Debit",
@@ -224,7 +224,7 @@ class _RemittancePageState extends State<RemittancePage> {
                   ],
                 ),
                 Text(
-                  item['amount'],
+                  item['productAmount'],
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
