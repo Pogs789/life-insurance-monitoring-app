@@ -1,4 +1,4 @@
-# Insurance Agent's Remittance Management System
+# iRemitMo: The Insurance Agent's Remittance Management System
 
 This is a simple tool for insurance agents which automatically calculates the monthly collection needed to be remitted to the insurance company.
 
