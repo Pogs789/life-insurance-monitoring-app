@@ -34,9 +34,9 @@ AuthProvider buildRealAuthProvider() {
   final dio = Dio();
 
   // Attach interceptor once so all requests can auto-add Bearer token
-  dio.interceptors.add(AuthInterceptor(secureStorage));
+  dio.interceptors.add(AuthInterceptor(secureStorage, dio));
 
-  // Data sources
+  // ...existing code...
   final authRemote = AuthRemoteDataSourceImpl(dio: dio);
   final authLocal = AuthLocalDataSourceImpl();
 

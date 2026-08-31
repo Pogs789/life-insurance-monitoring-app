@@ -41,13 +41,13 @@ class _PolicyListPageState extends State<PolicyListPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<CompanyProvider>(
-      create: (_) {
-        final secureStorage = const FlutterSecureStorage();
-        final dio = Dio();
+       create: (_) {
+         final secureStorage = const FlutterSecureStorage();
+         final dio = Dio();
 
-        dio.interceptors.add(AuthInterceptor(secureStorage));
+         dio.interceptors.add(AuthInterceptor(secureStorage, dio));
 
-        final repository = CompanyRepositoryImpl(
+         final repository = CompanyRepositoryImpl(
           CompanyRemoteDataSourceImpl(dio: dio),
         );
 
@@ -130,31 +130,33 @@ class _PolicyListPageState extends State<PolicyListPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            policy.insuranceProductName,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: AppConstants.fontSizeXXL,
-                                  color: AppColors.textPrimary,
-                                ),
+                          Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: AppConstants.spaceSM,
+                            children: [
+                              Text(
+                                policy.insuranceProductName,
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: AppConstants.fontSizeXXL,
+                                      color: AppColors.textPrimary,
+                                    ),
+                              ),
+                              Text(
+                                '(Tap for more details)',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: AppColors.textPrimary.withValues(alpha: 0.5),
+                                      fontSize: AppConstants.fontSizeXS,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: AppConstants.spaceMD),
                           _PolicyDetailRow(
                             label: 'Contract Price',
                             value: _formatAmount(policy.productAmount),
                             isCurrency: true,
-                          ),
-                          const SizedBox(height: AppConstants.spaceSM),
-                          _PolicyDetailRow(
-                            label: 'Package Contents',
-                            value: policy.productContents,
-                          ),
-                          const SizedBox(height: AppConstants.spaceSM),
-                          _PolicyDetailRow(
-                            label: 'Payment Terms',
-                            value: policy.paymentTerms.isEmpty
-                                ? 'N/A'
-                                : policy.paymentTerms.join(', '),
                           ),
                         ],
                       ),

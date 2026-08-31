@@ -35,7 +35,13 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final result = await _isLoggedInUseCase();
+      final result = await _isLoggedInUseCase().timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          // If secure storage takes too long, assume user is not logged in
+          return false;
+        },
+      );
       _isLoggedIn = result;
       _authStatus = result
           ? AuthStatus.authenticated
@@ -129,7 +135,10 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final result = await _isLoggedInUseCase();
+      final result = await _isLoggedInUseCase().timeout(
+        const Duration(seconds: 10),
+        onTimeout: () => false,
+      );
       _isLoggedIn = result;
       _authStatus = result
           ? AuthStatus.authenticated

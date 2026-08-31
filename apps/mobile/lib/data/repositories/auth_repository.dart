@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:life_insurance_monitoring_mobile/data/datasources/local/auth_local_datasource.dart';
+import 'package:life_insurance_monitoring_mobile/data/models/auth_response_model.dart';
 import 'package:life_insurance_monitoring_mobile/domain/repositories/auth_repository.dart';
 import '../datasources/remote/auth_remote_datasource.dart';
 
@@ -49,31 +51,51 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<bool> checkLoggedInUser() async {
-    final session = await authLocal.getSession();
-    final loggedInUser = await authLocal.getUserId();
+    try {
+      final sessionFuture = authLocal.getSession();
+      final userIdFuture = authLocal.getUserId();
 
-    if (session == null || loggedInUser == null) {
-      await authLocal.clearSession();
-      return false;
-    }
+      // Use Future.wait with a timeout to prevent hanging
+      final results = await Future.wait(
+        [sessionFuture, userIdFuture],
+        eagerError: true,
+      ).timeout(
+        const Duration(seconds: 5),
+        onTimeout: () => throw TimeoutException('Secure storage access timed out'),
+      );
 
-    // Check if access token is expired
-    if (_isTokenExpired(session.accessToken)) {
-      debugPrint("Access token is expired. Attempting to refresh...");
+      final session = results[0] as AuthSessionModel?;
+      final loggedInUser = results[1] as String?;
 
-      try {
-        await refreshToken();
-        debugPrint("Token refresh successful");
-        return true;
-      } catch (e) {
-        debugPrint("Token refresh failed: $e. Clearing session.");
+      if (session == null || loggedInUser == null) {
         await authLocal.clearSession();
         return false;
       }
-    }
 
-    debugPrint("Access token is still valid");
-    return true;
+      // Check if access token is expired
+      if (_isTokenExpired(session.accessToken)) {
+        debugPrint("Access token is expired. Attempting to refresh...");
+
+        try {
+          await refreshToken();
+          debugPrint("Token refresh successful");
+          return true;
+        } catch (e) {
+          debugPrint("Token refresh failed: $e. Clearing session.");
+          await authLocal.clearSession();
+          return false;
+        }
+      }
+
+      debugPrint("Access token is still valid");
+      return true;
+    } on TimeoutException catch (e) {
+      debugPrint("Timeout checking logged in user: $e. Assuming not logged in.");
+      return false;
+    } catch (e) {
+      debugPrint("Error checking logged in user: $e. Assuming not logged in.");
+      return false;
+    }
   }
 
   /// Checks if a JWT token is expired by decoding and checking the expiry time.
